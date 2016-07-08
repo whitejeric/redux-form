@@ -1,9 +1,9 @@
 import React from 'react';
-import CheckBoard from '../containers/check-board';
+import FormTable from './form-table';
 
 const App = () => (
   <div>
-    <CheckBoard />
+    <FormTable />
   </div>
 )
 

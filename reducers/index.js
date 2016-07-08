@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import BoardReducer from './reducer-board';
-import GameReducer from './reducer-game';
+import FormReducer from './reducer-form';
+import TableReducer from './reducer-table';
 
 const rootReducer = combineReducers({
-  board: BoardReducer,
-  game: GameReducer
+  form: FormReducer,
+  table: TableReducer
 });
 
 export default rootReducer;
