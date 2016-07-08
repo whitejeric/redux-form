@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import CheckBoard from '../containers/check-board';
 
 const App = () => (
   <div>
-    SSS
+    <CheckBoard />
   </div>
 )
 
