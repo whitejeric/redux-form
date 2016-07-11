@@ -104,6 +104,7 @@ class FormSide extends Component{
 
               <TextInput key={5} name='Notes' placeholder='Enter any additional notes on client' type='textarea' value={this.state.values.Notes} onChange={this.handleChange.bind(this, 'Notes')} />
             </div>
+            
             <div className='formButtons'>
               <Button type='submit' className='formButtons'>Submit</Button>
               <Button onClick={this.handleClear.bind(this)} className='formButtons'>Clear</Button>
