@@ -2,7 +2,6 @@
 /*--------FORM ACTIONS--------*/
 
 export const CURRENT_FORM = 'CURRENT_FORM';
-export const CURRENT_TABLE = 'CURRENT_TABLE';
 
 export const PUSH_TO_REDUX = 'PUSH_TO_REDUX';
 
@@ -19,6 +18,10 @@ export function pushFormToReduxState(formData){
     formData
   };
 }
+
+/*--------TABLE ACTIONS--------*/
+
+export const CURRENT_TABLE = 'CURRENT_TABLE';
 
 export function getTableState(){
   return {
