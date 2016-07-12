@@ -4,16 +4,19 @@ import {bindActionCreators} from 'redux';
 import _ from 'lodash';
 
 import {DATA} from '../resources/contact-test';
+import EditSide from './edit';
 
-import {Glyphicon, Image, Button} from 'react-bootstrap';
+import {Glyphicon, Image, Button,
+        Fade} from 'react-bootstrap';
 
-import {getTableState, pushFormToReduxState, removeContact} from '../actions/index';
+import {getTableState, pushFormToReduxState, removeContact, populateEditPage} from '../actions/index';
 
 class TableSide extends Component{
   constructor(){
     super();
     this.state = {
-      edit: true
+      edit: true,
+      showEditPage: false
     };
   }
 
@@ -36,6 +39,23 @@ class TableSide extends Component{
     }
   }
 
+  editPage(){
+    console.log('showEditPage: ' + this.state.showEditPage);
+    this.setState({showEditPage: !showEditPage});
+  }
+
+  contactFunction(contact){
+    if (!this.state.edit){
+        this.props.removeContact(contact);
+    }
+    else{
+        console.log('showEditPage: ' + this.state.showEditPage);
+        //if the open edit page != contact then dont close the edit page
+        this.setState({showEditPage: !this.state.showEditPage});
+        this.props.populateEditPage(contact);
+    }
+  }
+
   render(){
     const imgCenter = {
       textAlign: 'center',
@@ -45,50 +65,56 @@ class TableSide extends Component{
     const textCenter = {
       lineHeight: '250%'
     };
-    if (!this.state.edit){
-      let contactFunction = (contact) => {this.props.removeContact(contact)};
-    }
-    else{
-      let contactFunction = null;
-    }
+
 
     return(
-      <div className='tableHalf'>
-        <h2 className='tableHeader'>Contacts: </h2>
-        <table className='table table-hover'>
-          <tbody>
-              <tr>
-                <th></th>
-                <th>Name</th>
-                <th className='contactTableButton' onClick={() => this.setState({edit: !this.state.edit})}><Glyphicon glyph={this.state.edit ? 'pencil' : 'trash'}/></th>
-              </tr>
+      <div className='tableAndEdit'>
+        <div className='tableHalf'>
+          <h2 className='tableHeader'>Contacts: </h2>
+          <div className='tableContainer'>
+            <table className='table table-hover'>
+              <tbody>
 
-              {this.props.table.length < 1 ?
-                <tr>
-                  <td></td>
-                  <td>No contacts found.</td>
-                  <td></td>
-                </tr> : null}
-
-              {this.props.table.map(function(contact){
-                var d = new Date();
-                var n = d.getTime();
-                return(
-                    <tr key={contact.id} className='contactTableButton' onClick={this.contactFunction.bind(this, contact)}>
-
-                    <td style={imgCenter}><Image src={contact.Picture} width='40px' justified circle/></td>
-                    <td style={textCenter}>{contact.Name.length > 16 ? contact.Name.substring(0, 13) + '...' : contact.Name}</td>
-                    <td style={textCenter}>
-                      {this.state.edit ?
-                        <Glyphicon glyph='chevron-right' /> :
-                        <Glyphicon glyph='remove-circle' />}</td>
+                  <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th className='contactTableButton' onClick={() => this.setState({edit: !this.state.edit, showEditPage: false})}>
+                      <Glyphicon glyph={this.state.edit ? 'pencil' : 'trash'}/>
+                    </th>
                   </tr>
-                )
-              }, this)}
-          </tbody>
-        </table>
 
-      </div>
+                  {this.props.table.length < 1 ?
+                    <tr>
+                      <td></td>
+                      <td>No contacts found.</td>
+                      <td></td>
+                    </tr> : null}
+
+                  {this.props.table.map(function(contact){
+                    var d = new Date();
+                    var n = d.getTime();
+                    return(
+                        <tr key={contact.id} className='contactTableButton' onClick={this.contactFunction.bind(this, contact)}>
+                          <td style={imgCenter}><Image src={contact.Picture} width='40px' justified circle/></td>
+                          <td style={textCenter}>{contact.Name.length > 14 ? contact.Name.substring(0, 12) + '...' : contact.Name}</td>
+                          <td style={textCenter}>
+                            {this.state.edit ?
+                              <Glyphicon glyph='chevron-right' /> :
+                              <Glyphicon glyph='remove-circle' />}
+                          </td>
+                        </tr>
+                    )
+                  }, this)}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <Fade in={this.state.showEditPage && this.state.edit}>
+          <div className='editHalf'>
+            <EditSide showFunc={this.editPage.bind(this)} opened={this.state.showEditPage && this.state.edit}/>
+          </div>
+        </Fade>
+    </div>
     );
   }
 }
@@ -100,7 +126,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({getTableState, pushFormToReduxState, removeContact}, dispatch);
+  return bindActionCreators({getTableState, pushFormToReduxState, removeContact, populateEditPage}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableSide);

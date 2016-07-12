@@ -53,3 +53,14 @@ export function removeContact(contact){
     contact
   }
 }
+
+/*--------EDIT ACTIONS--------*/
+
+export const POPULATE_EDIT_PAGE = 'POPULATE_EDIT_PAGE';
+
+export function populateEditPage(contact){
+  return{
+    type: POPULATE_EDIT_PAGE,
+    contact
+  }
+}

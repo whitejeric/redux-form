@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Form, Col,
         Modal, Thumbnail, Image,
-        Glyphicon} from 'react-bootstrap';
+        Glyphicon, Fade} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -112,17 +112,34 @@ class FormSide extends Component{
       position: 'absolute',
       marginTop: '235px'
     };
-    var toRender = '';
+    const style = {
+      height: '100%',
+      position: 'relative',
+      float: 'left'
+    };
+
     if (this.state.formHidden){
-      toRender = (
+      var elementWidth = '0px';
+    }
+    else{
+      var elementWidth = '400px';
+    }
+
+    const size = {
+      width: elementWidth
+    };
+
+    return (
+      <div style={style}>
+        {this.state.formHidden ?
         <div className='formHalfHidden' onClick={this.handleOpen.bind(this)}>
           &nbsp;<Glyphicon glyph='plus' style={glyphStyle} />
         </div>
-      );
-    }
-    else {
-      toRender = (
-        <div className='formHalf'>
+        : null}
+
+
+      <Fade in={!this.state.formHidden}>
+        <div className='formHalf' style={size}>
           <h2 className='formHeader'>Add new: </h2>
           <hr />
 
@@ -156,9 +173,10 @@ class FormSide extends Component{
             <Button onClick={this.handleClose.bind(this)}>Close</Button>
           </div>
         </div>
-      );
-    }
-    return toRender
+      </Fade>
+    </div>
+
+    );
   }
 }
 
