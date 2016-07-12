@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import _ from 'lodash';
 
 import {DATA} from '../resources/contact-test';
 
@@ -11,6 +12,9 @@ import {getTableState, pushFormToReduxState, removeContact} from '../actions/ind
 class TableSide extends Component{
   constructor(){
     super();
+    this.state = {
+      edit: true
+    };
   }
 
   componentDidMount(){
@@ -23,6 +27,15 @@ class TableSide extends Component{
     }, this);
   }
 
+  contactFunction(contact){
+    if (!this.state.edit){
+      this.props.removeContact(contact);
+    }
+    else{
+      //insert edit
+    }
+  }
+
   render(){
     const imgCenter = {
       textAlign: 'center',
@@ -32,45 +45,43 @@ class TableSide extends Component{
     const textCenter = {
       lineHeight: '250%'
     };
-
+    if (!this.state.edit){
+      let contactFunction = (contact) => {this.props.removeContact(contact)};
+    }
+    else{
+      let contactFunction = null;
+    }
 
     return(
       <div className='tableHalf'>
-        <h2 className='tableHeader'>Your contacts: </h2>
-        <table className='table table-hover visible-desktop'>
+        <h2 className='tableHeader'>Contacts: </h2>
+        <table className='table table-hover'>
           <tbody>
-            <tr>
-              <th style={textCenter}>&nbsp;</th>
-              <th style={textCenter}>Name</th>
-              <th style={textCenter}>Phone</th>
-              <th style={textCenter}>Email</th>
-              <th style={textCenter}>Company</th>
-              <th style={textCenter}>Address</th>
-              <th style={textCenter}>Notes</th>
-              <th style={imgCenter}><Glyphicon glyph='trash'/></th>
-            </tr>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th className='contactTableButton' onClick={() => this.setState({edit: !this.state.edit})}><Glyphicon glyph={this.state.edit ? 'pencil' : 'trash'}/></th>
+              </tr>
+
               {this.props.table.length < 1 ?
                 <tr>
                   <td></td>
-                  <td>No contactzs found.</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>No contacts found.</td>
                   <td></td>
                 </tr> : null}
+
               {this.props.table.map(function(contact){
+                var d = new Date();
+                var n = d.getTime();
                 return(
-                  <tr key={contact.Name}>
+                    <tr key={contact.id} className='contactTableButton' onClick={this.contactFunction.bind(this, contact)}>
+
                     <td style={imgCenter}><Image src={contact.Picture} width='40px' justified circle/></td>
-                    <td style={textCenter}>{contact.Name}</td>
-                    <td style={textCenter}>{contact.Phone}</td>
-                    <td style={textCenter}>{contact.Email}</td>
-                    <td style={textCenter}>{contact.Company}</td>
-                    <td style={textCenter}>{contact.Address}</td>
-                    <td style={textCenter}>{contact.Notes}</td>
-                    <td style={textCenter}><Glyphicon glyph='remove-circle' className='removeContact' onClick={() => this.props.removeContact(contact)}/></td>
+                    <td style={textCenter}>{contact.Name.length > 16 ? contact.Name.substring(0, 13) + '...' : contact.Name}</td>
+                    <td style={textCenter}>
+                      {this.state.edit ?
+                        <Glyphicon glyph='chevron-right' /> :
+                        <Glyphicon glyph='remove-circle' />}</td>
                   </tr>
                 )
               }, this)}

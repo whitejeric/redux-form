@@ -11,12 +11,16 @@ import {getFormState, pushFormToReduxState, getTableState,
 import TextInput from '../components/text-input';
 import PictureSelector from '../components/picture-selector';
 
+import _ from 'lodash';
+
 class FormSide extends Component{
   constructor(){
     super();
+    const id = _.uniqueId();
     this.state={
       values: {
         Name: '',
+        id: id,
         Email: '',
         Company: '',
         Address: '',
@@ -51,11 +55,15 @@ class FormSide extends Component{
 
   handleSubmit(e){
     e.preventDefault();
+    if (this.state.values.Name === ''){
+      return
+    }
     this.props.pushFormToReduxState(this.state.values);
     this.props.getFormState();
-
+    const newId = _.uniqueId();
     this.setState({
         values: {
+          id: newId,
           Name: '',
           Email: '',
           Company: '',
@@ -115,25 +123,25 @@ class FormSide extends Component{
     else {
       toRender = (
         <div className='formHalf'>
-          <h2 className='formHeader'>Add new contact: </h2>
+          <h2 className='formHeader'>Add new: </h2>
           <hr />
 
           <div className='formBox'>
             <form onSubmit={this.handleSubmit.bind(this)}>
               <div className='formTopHalf'>
                 <div className='nameAndEmail'>
-                  <TextInput key={0} name='Name' placeholder='Enter client name' type='input' value={this.state.values.Name} onChange={this.handleChange.bind(this, 'Name')} />
-                  <TextInput key={4} name='Phone' placeholder='Enter clients business phone #' type='input' value={this.state.values.Phone} onChange={this.handleChange.bind(this, 'Phone')} />
-                  <TextInput key={1} name='Email' placeholder='Enter client email' type='input' value={this.state.values.Email} onChange={this.handleChange.bind(this, 'Email')} />
+                  <TextInput key={0} name='Name' placeholder='Enter contact name' type='input' value={this.state.values.Name} onChange={this.handleChange.bind(this, 'Name')} />
+                  <TextInput key={4} name='Phone' placeholder='Enter contact phone #' type='input' value={this.state.values.Phone} onChange={this.handleChange.bind(this, 'Phone')} />
+                  <TextInput key={1} name='Email' placeholder='Enter contact email' type='input' value={this.state.values.Email} onChange={this.handleChange.bind(this, 'Email')} />
                 </div>
                 <div className='picFloat' onClick={() => this.setState({showPictureSelector: true})}>
                   <Thumbnail href='#' className='picSize' src={this.state.values.Picture} />
                 </div>
               </div>
               <div className='companyAndNotes'>
-                <TextInput key={2} name='Company' placeholder='Enter clients business' type='input' value={this.state.values.Company} onChange={this.handleChange.bind(this, 'Company')} />
-                <TextInput key={3} name='Address' placeholder='Enter clients business address' type='input' value={this.state.values.Address} onChange={this.handleChange.bind(this, 'Address')} />
-                <TextInput key={5} name='Notes' placeholder='Enter any additional notes on client' type='input' value={this.state.values.Notes} onChange={this.handleChange.bind(this, 'Notes')} />
+                <TextInput key={2} name='Company' placeholder='Enter contact business' type='input' value={this.state.values.Company} onChange={this.handleChange.bind(this, 'Company')} />
+                <TextInput key={3} name='Address' placeholder='Enter contact address' type='input' value={this.state.values.Address} onChange={this.handleChange.bind(this, 'Address')} />
+                <TextInput key={5} name='Notes' placeholder='Enter any additional notes on contact' type='input' value={this.state.values.Notes} onChange={this.handleChange.bind(this, 'Notes')} />
               </div>
 
               <div className='formButtons'>

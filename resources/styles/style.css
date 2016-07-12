@@ -104,6 +104,8 @@ hr {
   float: left;
   background: linear-gradient(#0060F0, #0679F0);
   color: white;
+  -webkit-user-select: none;
+  cursor: default;
 
 }
 
@@ -116,11 +118,13 @@ hr {
   color: white;
 }
 
-.removeContact{
-  font-size: 20px;
+.contactTableButton{
+  font-size: 17px;
+  cursor: pointer !important;
+  color: rgba(0, 0, 0, 0.7);
 }
 
-.removeContact:hover{
+.contactTableButton:hover{
   color: rgba(6, 121, 240,1);
 }
 
@@ -133,9 +137,14 @@ hr {
 }
 
 .tableHalf{
+  -webkit-user-select: none;
+  cursor: default;
   position: relative;
   height: 100%;
+  width: 250px;
   float: left;
+  border: 1px solid green;
+  overflow-y: auto;
 }
 
 .modal-container {

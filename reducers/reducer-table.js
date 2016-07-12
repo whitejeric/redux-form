@@ -9,10 +9,10 @@ export default function(state = [], action){
       const newState = [action.formData, ...state];
       return newState;
     case REMOVE_CONTACT:
-      var removeList = [action.contact.Name];
+      var removeList = [action.contact.id];
 
       var removedState = state.filter(function(client) {
-        return removeList.indexOf(client.Name) === -1;
+        return removeList.indexOf(client.id) === -1;
       });
 
       console.log(removedState);
