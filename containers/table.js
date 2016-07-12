@@ -52,7 +52,7 @@ class TableSide extends Component{
               {this.props.table.length < 1 ?
                 <tr>
                   <td></td>
-                  <td>No contacts found.</td>
+                  <td>No contactzs found.</td>
                   <td></td>
                   <td></td>
                   <td></td>
