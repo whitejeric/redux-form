@@ -1,4 +1,4 @@
-import {CURRENT_FORM, CURRENT_TABLE, PUSH_TO_REDUX} from '../actions/index'; //just grabbing the name, not the function
+import {CURRENT_TABLE, PUSH_TO_REDUX, REMOVE_CONTACT} from '../actions/index'; //just grabbing the name, not the function
 
 export default function(state = [], action){
   switch (action.type){
@@ -6,8 +6,17 @@ export default function(state = [], action){
       console.log(state);
       return state;
     case PUSH_TO_REDUX:
-      const newState = [...state, action.formData];
+      const newState = [action.formData, ...state];
       return newState;
+    case REMOVE_CONTACT:
+      var removeList = [action.contact.Name];
+
+      var removedState = state.filter(function(client) {
+        return removeList.indexOf(client.Name) === -1;
+      });
+
+      console.log(removedState);
+      return removedState;
   }
   return state;
 }

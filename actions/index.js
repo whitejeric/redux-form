@@ -3,12 +3,40 @@
 
 export const CURRENT_FORM = 'CURRENT_FORM';
 
-export const PUSH_TO_REDUX = 'PUSH_TO_REDUX';
+export const OPEN_FORM = 'OPEN_FORM';
+
+export const HIDE_FORM = 'HIDE_FORM';
 
 
 export function getFormState(){
   return {
     type: CURRENT_FORM
+  };
+}
+
+export function openForm(){
+  return{
+    type: OPEN_FORM
+  };
+}
+
+export function hideForm(){
+  return{
+    type: HIDE_FORM
+  };
+}
+
+/*--------TABLE ACTIONS--------*/
+
+export const CURRENT_TABLE = 'CURRENT_TABLE';
+
+export const PUSH_TO_REDUX = 'PUSH_TO_REDUX';
+
+export const REMOVE_CONTACT = 'REMOVE_CONTACT';
+
+export function getTableState(){
+  return {
+    type: CURRENT_TABLE
   };
 }
 
@@ -19,12 +47,9 @@ export function pushFormToReduxState(formData){
   };
 }
 
-/*--------TABLE ACTIONS--------*/
-
-export const CURRENT_TABLE = 'CURRENT_TABLE';
-
-export function getTableState(){
-  return {
-    type: CURRENT_TABLE
-  };
+export function removeContact(contact){
+  return{
+    type: REMOVE_CONTACT,
+    contact
+  }
 }

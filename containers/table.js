@@ -6,63 +6,77 @@ import {DATA} from '../resources/contact-test';
 
 import {Glyphicon, Image, Button} from 'react-bootstrap';
 
-import {getTableState, pushFormToReduxState} from '../actions/index';
+import {getTableState, pushFormToReduxState, removeContact} from '../actions/index';
 
 class TableSide extends Component{
   constructor(){
     super();
   }
+
   componentDidMount(){
     this.fillTable();
   }
-  fillTable(){
-    this.props.getTableState();
-    var test = DATA.clients.map(function(contact){
-      console.log(contact);
 
+  fillTable(){
+    var test = DATA.clients.map(function(contact){
       this.props.pushFormToReduxState(contact);
     }, this);
   }
+
   render(){
-    const textCenter = {
-      textAlign: 'center'
+    const imgCenter = {
+      textAlign: 'center',
+      lineHeight: '200%'
     };
 
-    const removeButton = {
-      background: 'transparent',
+    const textCenter = {
+      lineHeight: '250%'
     };
+
 
     return(
       <div className='tableHalf'>
         <h2 className='tableHeader'>Your contacts: </h2>
-        <table className='table table-hover'>
+        <table className='table table-hover visible-desktop'>
           <tbody>
             <tr>
-              <th style={textCenter}><Glyphicon glyph='user'/></th>
-              <th>Name</th>
-              <th>Phone</th>
-              <th>Email</th>
-              <th>Company</th>
-              <th>Address</th>
-              <th>Notes</th>
-              <th><Glyphicon glyph='trash'/></th>
+              <th style={textCenter}>&nbsp;</th>
+              <th style={textCenter}>Name</th>
+              <th style={textCenter}>Phone</th>
+              <th style={textCenter}>Email</th>
+              <th style={textCenter}>Company</th>
+              <th style={textCenter}>Address</th>
+              <th style={textCenter}>Notes</th>
+              <th style={imgCenter}><Glyphicon glyph='trash'/></th>
             </tr>
+              {this.props.table.length < 1 ?
+                <tr>
+                  <td></td>
+                  <td>No contacts found.</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr> : null}
               {this.props.table.map(function(contact){
                 return(
                   <tr key={contact.Name}>
-                    <td style={textCenter}><Image src={contact.Picture} width='40px' justified circle/></td>
-                    <td>{contact.Name}</td>
-                    <td>{contact.Phone}</td>
-                    <td>{contact.Email}</td>
-                    <td>{contact.Company}</td>
-                    <td>{contact.Address}</td>
-                    <td>{contact.Notes}</td>
-                    <td style={removeButton}><Glyphicon glyph='remove'/></td>
+                    <td style={imgCenter}><Image src={contact.Picture} width='40px' justified circle/></td>
+                    <td style={textCenter}>{contact.Name}</td>
+                    <td style={textCenter}>{contact.Phone}</td>
+                    <td style={textCenter}>{contact.Email}</td>
+                    <td style={textCenter}>{contact.Company}</td>
+                    <td style={textCenter}>{contact.Address}</td>
+                    <td style={textCenter}>{contact.Notes}</td>
+                    <td style={textCenter}><Glyphicon glyph='remove-circle' className='removeContact' onClick={() => this.props.removeContact(contact)}/></td>
                   </tr>
                 )
-              })}
+              }, this)}
           </tbody>
         </table>
+
       </div>
     );
   }
@@ -70,13 +84,12 @@ class TableSide extends Component{
 
 function mapStateToProps(state){
   return {
-    table: state.table,
-    form: state.form
+    table: state.table
   };
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({getTableState, pushFormToReduxState}, dispatch);
+  return bindActionCreators({getTableState, pushFormToReduxState, removeContact}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableSide);

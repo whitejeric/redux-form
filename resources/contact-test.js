@@ -13,7 +13,7 @@ export const DATA = {"clients":[
     "Email": "pcnut@gmail.com",
     "Company": "Information Technology Tech",
     "Address": "cyberspace",
-    "Phone": "none",
+    "Phone": "101000101",
     "Notes": "extremely logical",
     "Picture": "../resources/images/Babbage.png"
   },
@@ -31,7 +31,7 @@ export const DATA = {"clients":[
     "Email": "tbh-abe@yahoo.com",
     "Company": "Emancipation Nation",
     "Address": "Ford Theatre",
-    "Phone": "5",
+    "Phone": "520-5200",
     "Notes": "tall",
     "Picture": "../resources/images/Abraham_Lincoln.png"
   },
