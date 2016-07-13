@@ -16,7 +16,9 @@ class TableSide extends Component{
     super();
     this.state = {
       edit: true,
-      showEditPage: false
+      showEditPage: false,
+      showEditPageCollapse: false,
+      contactBeingEdited: {}
     };
   }
 
@@ -28,15 +30,6 @@ class TableSide extends Component{
     var test = DATA.clients.map(function(contact){
       this.props.pushFormToReduxState(contact);
     }, this);
-  }
-
-  contactFunction(contact){
-    if (!this.state.edit){
-      this.props.removeContact(contact);
-    }
-    else{
-      //insert edit
-    }
   }
 
   editPage(){
@@ -51,8 +44,21 @@ class TableSide extends Component{
     else{
         console.log('showEditPage: ' + this.state.showEditPage);
         //if the open edit page != contact then dont close the edit page
-        this.setState({showEditPage: !this.state.showEditPage});
-        this.props.populateEditPage(contact);
+        if (contact === this.state.contactBeingEdited){
+          this.setState({
+            showEditPageCollapse: false,
+            showEditPage: false,
+            contactBeingEdited: {}
+          });
+        }
+        else {
+          this.props.populateEditPage(contact);
+          this.setState({
+            showEditPageCollapse: true,
+            showEditPage: true,
+            contactBeingEdited: contact
+          });
+        }
     }
   }
 
@@ -109,9 +115,9 @@ class TableSide extends Component{
             </table>
           </div>
         </div>
-        <Fade in={this.state.showEditPage && this.state.edit}>
+        <Fade in={(this.state.showEditPage && this.state.edit)} onEntered={() => this.setState({showEditPageCollapse: true})} onExited={() => this.setState({showEditPageCollapse: false})}>
           <div className='editHalf'>
-            <EditSide showFunc={this.editPage.bind(this)} opened={this.state.showEditPage && this.state.edit}/>
+            <EditSide showFunc={this.editPage.bind(this)} opened={(this.state.showEditPageCollapse)} collapse={this.state.showEditPageCollapse}/>
           </div>
         </Fade>
     </div>

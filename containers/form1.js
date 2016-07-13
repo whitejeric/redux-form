@@ -12,6 +12,8 @@ import TextInput from '../components/text-input';
 import PictureSelector from '../components/picture-selector';
 import ThumbButton from '../components/thumb-button';
 
+import _ from 'lodash';
+
 class FormSide extends Component{
   constructor(){
     super();
@@ -28,7 +30,7 @@ class FormSide extends Component{
         Picture: '../resources/images/default.jpg'
       },
       showPictureSelector: false,
-      formHidden: true
+      formHidden: false
     };
   }
 
@@ -124,7 +126,7 @@ class FormSide extends Component{
       var elementWidth = '400px';
     }
 
-    const fadeWidth = {
+    const size = {
       width: elementWidth
     };
 
@@ -138,31 +140,22 @@ class FormSide extends Component{
 
 
       <Fade in={!this.state.formHidden}>
-        <div className='formHalf' style={fadeWidth}>
+        <div className='formHalf' style={size}>
           <h2 className='formHeader'>Add new: </h2>
           <hr />
 
           <div className='formBox'>
             <form onSubmit={this.handleSubmit.bind(this)}>
-
               <div className='formTopHalf'>
                 <div className='nameAndEmail'>
                   <TextInput key={0} name='Name' placeholder='Enter contact name' type='input' value={this.state.values.Name} onChange={this.handleChange.bind(this, 'Name')} />
                   <TextInput key={4} name='Phone' placeholder='Enter contact phone #' type='input' value={this.state.values.Phone} onChange={this.handleChange.bind(this, 'Phone')} />
                   <TextInput key={1} name='Email' placeholder='Enter contact email' type='input' value={this.state.values.Email} onChange={this.handleChange.bind(this, 'Email')} />
                 </div>
-
-                <ThumbButton
-                  style='formPicture'
-                  onClickFunc={() => this.setState({showPictureSelector: true})}
-                  picture={this.state.values.Picture}
-                  closeFunc={() => this.setState({showPictureSelector:false})}
-                  selectFunc={this.handlePictureSelect.bind(this)}
-                  showState={this.state.showPictureSelector}
-                  caption='Select photo'
-                  rounded />
+                <div className='picFloat' onClick={() => this.setState({showPictureSelector: true})}>
+                  <Thumbnail href='#' className='picSize' src={this.state.values.Picture} />
+                </div>
               </div>
-
               <div className='companyAndNotes'>
                 <TextInput key={2} name='Company' placeholder='Enter contact business' type='input' value={this.state.values.Company} onChange={this.handleChange.bind(this, 'Company')} />
                 <TextInput key={3} name='Address' placeholder='Enter contact address' type='input' value={this.state.values.Address} onChange={this.handleChange.bind(this, 'Address')} />
@@ -174,13 +167,12 @@ class FormSide extends Component{
                 <Button type='submit'>Submit</Button>
               </div>
 
+              <PictureSelector closeFunc={() => this.setState({showPictureSelector:false})} selectFunc={this.handlePictureSelect.bind(this)} showState={this.state.showPictureSelector} />
             </form>
           </div>
-
           <div className='closeButton'>
             <Button onClick={this.handleClose.bind(this)}>Close</Button>
           </div>
-
         </div>
       </Fade>
     </div>

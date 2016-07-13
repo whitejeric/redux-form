@@ -9,6 +9,71 @@
   margin-left: 2%;
 }
 
+.editTable{
+  margin-left: 20px;
+  table-layout: fixed;
+}
+
+.editTable td {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
+}
+
+.editTable td:hover {
+  border-bottom: 1px solid rgba(255, 255, 255, 1);
+  cursor: pointer;
+}
+
+.editTableCellLeft{
+  width: 150px;
+  margin-right: 10px;
+}
+
+.editTableCellRight{
+  width: 200px;
+}
+
+.editHeader{
+  margin-left: -1%;
+  text-align: center;
+}
+
+.editSubHeading{
+  margin-left: -1%;
+  text-align: center;
+  line-height: 50%;
+}
+
+.editHeader:hover{
+  cursor: text !important;
+  box-shadow: 0px 0px 5px 1px rgba(255, 255, 255,0.8);
+}
+
+.subEdit{
+  position: absolute;
+  z-index: 1000;
+  margin-top: 425px;
+  width: 400px;
+  height: 75px;
+}
+
+.subEdit input{
+  text-indent: 5px;
+  border: none;
+  margin-left: 10%;
+  width: 80%;
+  height: 68px;
+  font-size: 30px;
+  background: linear-gradient(rgba(255, 255, 255,0.3), rgba(255, 255, 255,0.4), rgba(255, 255, 255,0.3));
+}
+
+.subEdit input:focus{
+  outline: none !important;
+}
+
 .tableHeader{
   margin-left: 2%;
   height: 1.35em;
@@ -27,7 +92,6 @@
   width:71%;
   height: 100%;
 }
-
 
 hr {
   display: block;
@@ -71,22 +135,46 @@ hr {
   bottom: 15px;
 }
 
-.picFloat{
+.formPictureContainer{
   position: relative;
   float: left;
-  width: 21%;
+  margin-left: 1%;
+  margin-top: 1px;
   height: auto;
+  width: auto;
+  cursor: pointer;
 }
 
-.picSize{
-  width: 100px;
-  height: 100px;
-  margin-left: 10%;
-  margin-top: 2%;
-  background: rgba(255, 255, 255, 1);
-  position: relative;
+.formPicture{
+  width: 108px;
+  height: 111px;
+  position: absolute;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 1);
+}
+
+.formPicture:hover{
+  box-shadow: 0px 0px 5px 1px rgba(255, 255, 255,0.8);
+}
+
+.editPictureContainer{
+  position: relative;
+  margin-left: 75px;
+  margin-top: 5%;
+  height: 250px;
+  width: 250px;
+  cursor: pointer;
+  float: left;
+}
+
+.editPicture{
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  overflow: hidden;
+}
+
+.editPicture:hover{
+  box-shadow: 0px 0px 5px 1px rgba(255, 255, 255,0.8);
 }
 
 .companyAndNotes{
@@ -159,12 +247,14 @@ hr {
   height: 100%;
   float: left;
 }
-
+.some{
+  background: linear-gradient(#F03390, #F05590, #D08810);
+}
 .editHalf{
   position: relative;
   height: 500px;
   float: left;
-  background: linear-gradient(#0060F0, #0679F0);
+  background: linear-gradient(#F2AB3F, #F2A13C);
   color: white;
   -webkit-user-select: none;
   cursor: default;

@@ -30,12 +30,16 @@ export default class TextInput extends React.Component{
       background: 'rgba(0, 0, 0, 0.05)',
       textIndent: '5px'
     };
-    return(
-      <FormGroup>
-        <ControlLabel style={styleLeft}>{this.props.name}:</ControlLabel>
-        <FormControl style={styleRight} componentClass={this.props.type} placeholder={this.props.placeholder} value={this.props.value} onChange={this.handleChange.bind(this)}/>
-        <br />
-      </FormGroup>
-    );
+    var toRender = '';
+    if (this.props.type === 'input'){
+      toRender = (
+        <FormGroup>
+          <ControlLabel style={styleLeft}>{this.props.name}:</ControlLabel>
+          <FormControl style={styleRight} componentClass={this.props.type} placeholder={this.props.placeholder} value={this.props.value} onChange={this.handleChange.bind(this)}/>
+          <br />
+        </FormGroup>
+      );
+    }
+    return toRender
   }
 }

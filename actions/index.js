@@ -58,9 +58,17 @@ export function removeContact(contact){
 
 export const POPULATE_EDIT_PAGE = 'POPULATE_EDIT_PAGE';
 
+export const CURRENT_EDIT = 'CURRENT_EDIT';
+
 export function populateEditPage(contact){
   return{
     type: POPULATE_EDIT_PAGE,
     contact
+  }
+}
+
+export function getEditState(){
+  return{
+    type: CURRENT_EDIT
   }
 }
