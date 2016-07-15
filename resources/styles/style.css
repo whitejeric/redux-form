@@ -10,68 +10,64 @@
 }
 
 .editTable{
-  margin-left: 20px;
+  margin-top: -10px;
+  margin-left: 10px;
   table-layout: fixed;
 }
 
 .editTable td {
+  position: relative;
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  height: 40px;
+
 }
 
-.editTable td:hover {
-  border-bottom: 1px solid rgba(255, 255, 255, 1);
-  cursor: pointer;
-}
-
-.editTableCellLeft{
-  width: 150px;
+.editTableCell{
+  width:390px;
   margin-right: 10px;
 }
 
-.editTableCellRight{
-  width: 200px;
-}
-
-.editHeader{
-  margin-left: -1%;
-  text-align: center;
-}
-
-.editSubHeading{
-  margin-left: -1%;
-  text-align: center;
-  line-height: 50%;
-}
-
-.editHeader:hover{
-  cursor: text !important;
-  box-shadow: 0px 0px 5px 1px rgba(255, 255, 255,0.8);
-}
-
-.subEdit{
+.editTableCellInput{
   position: absolute;
-  z-index: 1000;
-  margin-top: 425px;
-  width: 400px;
-  height: 75px;
-}
-
-.subEdit input{
+  margin-left: 10px;
   text-indent: 5px;
   border: none;
-  margin-left: 10%;
-  width: 80%;
-  height: 68px;
-  font-size: 30px;
-  background: linear-gradient(rgba(255, 255, 255,0.3), rgba(255, 255, 255,0.4), rgba(255, 255, 255,0.3));
+  width: 320px;
+  height: 30px;
+  color: white;
+  background: rgba(255, 255, 255,0.07);
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.subEdit input:focus{
-  outline: none !important;
+.iconButton{
+   text-shadow: '2px 2px 8px #000000';
+}
+
+.editTableCellInput:focus{
+  border: none;
+  outline:none;
+  background: rgba(255, 255, 255,0.13);
+}
+
+.editTableCellInput::-webkit-input-placeholder {
+  font-style: italic;
+  color: rgba(255, 255, 255,0.5) !important;
+}
+
+.editTableCellInput:-moz-placeholder { /* Firefox 18- */
+  color: rgba(255, 255, 255,0.5) !important;
+}
+
+.editTableCellInput::-moz-placeholder {  /* Firefox 19+ */
+  color: rgba(255, 255, 255,0.5) !important;
+}
+
+.editTableCellInput:-ms-input-placeholder {
+  color: rgba(255, 255, 255,0.5) !important;
 }
 
 .tableHeader{
@@ -158,17 +154,17 @@ hr {
 
 .editPictureContainer{
   position: relative;
-  margin-left: 75px;
+  margin-left: 95px;
   margin-top: 5%;
-  height: 250px;
-  width: 250px;
+  height: 220px;
+  width: 220px;
   cursor: pointer;
   float: left;
 }
 
 .editPicture{
-  width: 250px;
-  height: 250px;
+  width: 220px;
+  height: 220px;
   position: absolute;
   overflow: hidden;
 }
@@ -189,7 +185,7 @@ hr {
   position: relative;
   height: 100%;
   float: left;
-  background: linear-gradient(#0060F0, #0679F0);
+  background: linear-gradient(  #9698E0, #6C6EA0);
   color: white;
   -webkit-user-select: none;
   cursor: default;
@@ -203,7 +199,7 @@ hr {
   float: left;
   z-index: 10000;
   cursor: pointer;
-  background: linear-gradient(#0060F0, #0679F0);
+  background: linear-gradient(#9698E0, #6C6EA0);
   color: white;
 }
 
@@ -232,6 +228,7 @@ hr {
   height: 100%;
   width: 250px;
   float: left;
+  background: linear-gradient( #E0FBFC);
 }
 
 .tableContainer{
@@ -249,12 +246,19 @@ hr {
 }
 .some{
   background: linear-gradient(#F03390, #F05590, #D08810);
+  background: linear-gradient(#0060F0, #0679F0);
+  background: linear-gradient(#F2AB3F, #F2A13C);
+  rgba(6, 255, 168,1)
+  background: linear-gradient(#00FFA1, #00C4F0);
+  background: linear-gradient(  #9698E0, #6C6EA0);
+  background: linear-gradient( #E0FBFC, #EE6C4D);
+  background: linear-gradient( #E0FBFC, #4C5760);
 }
 .editHalf{
   position: relative;
   height: 500px;
   float: left;
-  background: linear-gradient(#F2AB3F, #F2A13C);
+  background: linear-gradient( #9698E0, #EE6C4D);
   color: white;
   -webkit-user-select: none;
   cursor: default;

@@ -9,6 +9,8 @@ import EditSide from './edit';
 import {Glyphicon, Image, Button,
         Fade} from 'react-bootstrap';
 
+import IconFader from '../components/icon-fader';
+
 import {getTableState, pushFormToReduxState, removeContact, populateEditPage} from '../actions/index';
 
 class TableSide extends Component{
@@ -85,7 +87,7 @@ class TableSide extends Component{
                     <th></th>
                     <th>Name</th>
                     <th className='contactTableButton' onClick={() => this.setState({edit: !this.state.edit, showEditPage: false})}>
-                      <Glyphicon glyph={this.state.edit ? 'pencil' : 'trash'}/>
+                      <IconFader glyphA='pencil' glyphB='trash' bool={this.state.edit}/>
                     </th>
                   </tr>
 
@@ -104,9 +106,7 @@ class TableSide extends Component{
                           <td style={imgCenter}><Image src={contact.Picture} width='40px' justified circle/></td>
                           <td style={textCenter}>{contact.Name.length > 14 ? contact.Name.substring(0, 12) + '...' : contact.Name}</td>
                           <td style={textCenter}>
-                            {this.state.edit ?
-                              <Glyphicon glyph='chevron-right' /> :
-                              <Glyphicon glyph='remove-circle' />}
+                            <IconFader glyphA='chevron-right' glyphB='remove-circle' bool={this.state.edit}/>
                           </td>
                         </tr>
                     )
@@ -115,9 +115,12 @@ class TableSide extends Component{
             </table>
           </div>
         </div>
-        <Fade in={(this.state.showEditPage && this.state.edit)} onEntered={() => this.setState({showEditPageCollapse: true})} onExited={() => this.setState({showEditPageCollapse: false})}>
+        <Fade
+          in={(this.state.showEditPage && this.state.edit)}
+          onEntered={() => this.setState({showEditPageCollapse: true})}
+          onExited={() => this.setState({showEditPageCollapse: false})}>
           <div className='editHalf'>
-            <EditSide showFunc={this.editPage.bind(this)} opened={(this.state.showEditPageCollapse)} collapse={this.state.showEditPageCollapse}/>
+            <EditSide showFunc={this.contactFunction.bind(this)} opened={this.state.showEditPageCollapse} collapse={this.state.showEditPageCollapse}/>
           </div>
         </Fade>
     </div>

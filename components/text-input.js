@@ -27,8 +27,9 @@ export default class TextInput extends React.Component{
       color: 'white',
       border: 'none',
       boxShadow: 'white',
-      background: 'rgba(0, 0, 0, 0.05)',
-      textIndent: '5px'
+      background: 'rgba(255, 255, 255,0.1)',
+      textIndent: '5px',
+      borderRadius: '0px'
     };
     var toRender = '';
     if (this.props.type === 'input'){

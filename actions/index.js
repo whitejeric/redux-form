@@ -34,6 +34,8 @@ export const PUSH_TO_REDUX = 'PUSH_TO_REDUX';
 
 export const REMOVE_CONTACT = 'REMOVE_CONTACT';
 
+export const RENEW_CONTACT = 'RENEW_CONTACT';
+
 export function getTableState(){
   return {
     type: CURRENT_TABLE
@@ -47,11 +49,18 @@ export function pushFormToReduxState(formData){
   };
 }
 
+export function renewContact(contact){
+  return {
+    type: RENEW_CONTACT,
+    contact
+  };
+}
+
 export function removeContact(contact){
   return{
     type: REMOVE_CONTACT,
     contact
-  }
+  };
 }
 
 /*--------EDIT ACTIONS--------*/
@@ -60,12 +69,26 @@ export const POPULATE_EDIT_PAGE = 'POPULATE_EDIT_PAGE';
 
 export const CURRENT_EDIT = 'CURRENT_EDIT';
 
+export const EDIT_CONTACT_VALUE = 'EDIT_CONTACT_VALUE';
+
+export const EDIT_CONTACT_BOOL = 'EDIT_CONTACT_BOOL';
+
 export function populateEditPage(contact){
   return{
     type: POPULATE_EDIT_PAGE,
     contact
   }
 }
+
+export function editContactValue(param, value, originalValue){
+  return{
+    type: EDIT_CONTACT_VALUE,
+    param,
+    value,
+    originalValue
+  }
+}
+
 
 export function getEditState(){
   return{
